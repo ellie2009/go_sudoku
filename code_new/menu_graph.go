@@ -67,8 +67,6 @@ func buildMenuGraph() *Graph {
 	g.AddVertex(9, "Print Board")
 	g.AddVertex(10, "Undo Move")
 	
-	g.AddEdge(15342,1)
-
 	// add all menu connections
 	g.AddEdge(1,2)
 	g.AddEdge(1,3)
