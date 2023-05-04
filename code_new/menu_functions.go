@@ -36,11 +36,11 @@ func (g *game) makeAMove() {
 func (g *game) printBoard() {
     for i := 0; i < len(g.gameBoard); i++ {
         if i%3 == 0 && i != 0 {
-            fmt.Println("---+---+---")
+            fmt.Println("---+---+---") // Println adds a new line to the string
         }
         for j := 0; j < len(g.gameBoard); j++ {
             if j%3 == 0 && j != 0 {
-                fmt.Print("|")
+                fmt.Print("|") // Print doesn't add one, so has to be used here
             }
             if g.gameBoard[i][j] == 0 {
                 fmt.Print(" ")
@@ -81,32 +81,13 @@ func loadSavedGame() (game, error) {
 
 	return game, nil
 }
-/*
-func saveGame(g game) {
-	savedGames = append(savedGames, g);
-}
-
-func loadSavedGame() (*game, error) {
-	if len(savedGames) == 0 {
-		return nil, errors.New("no games have been saved yet")
-	}
-
-	for i := 0; i < len(savedGames); i++ {
-		fmt.Println(i, "name:", savedGames[i].playerName, "- difficulty:", savedGames[i].difficulty)
-	}
-	fmt.Println("Select a game to continue:")
-	var userInput int
-	fmt.Scan(&userInput)
-
-	return &savedGames[userInput], nil
-}
-*/
 
 func (g *Graph) printMenuItems(currMenuItem int) {
 	sb := strings.Builder{}
 
-	childItems := g.GetNeighbours(currMenuItem)
-	// Child items are returned in a random order. For the menu to work correctly, they need to be displayed in the correct order, so sorting here is necessary.
+	childItems := g.GetAllNeighbourElements(currMenuItem)
+	// Child items are returned in a random order. For the menu to work correctly, 
+	// they need to be displayed in the correct order, so sorting here is necessary.
 	sort.Ints(childItems)
 
 	for i := 0; i < len(childItems); i++ {

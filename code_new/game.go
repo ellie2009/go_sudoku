@@ -31,9 +31,8 @@ func (g *game) createBoard() {
 }
 
 func (g *game) createBoardWithPrefilledDiagonalBoxes() {
-	// fill in the diagonal boxes. No validation is required at this point.
+	// fill in the three diagonal boxes. No validation is required because they are independent from each other.
 
-	//loop 3 times because there are 3 diagonal boxes
 	for i := 0; i < 9; i += 3 {
 		nums := [9]int{1, 2, 3, 4, 5, 6, 7, 8, 9}
 		rand.Shuffle(len(nums), func(i, j int) { nums[i], nums[j] = nums[j], nums[i] })
@@ -81,7 +80,6 @@ func (g *game) placeNumber(row int, col int, num int) {
 	} else {
 		fmt.Println("INVALID MOVE.")
 	}
-//	g.printBoard()
 }
 
 func (g *game) isValidMove(row int, col int, num int) bool {

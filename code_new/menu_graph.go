@@ -17,16 +17,16 @@ type Edge struct {
 }
 
 func CreateNewGraph() *Graph {
-	g := &Graph{Vertices: map[int]*Vertex{}}
+	graph := &Graph{Vertices: map[int]*Vertex{}}
 
-	return g
+	return graph
 }
 
-func (g *Graph) AddVertex(id int, text string) {
+func (g *Graph) AddNewVertex(id int, text string) {
 	g.Vertices[id] = &Vertex{Id: id, Text: text, Edges: map[int]*Edge{}}
 }
 
-func (g *Graph) AddEdge(vertexId int, destVertexId int) {
+func (g *Graph) AddNewEdge(vertexId int, destVertexId int) {
 	if g.Vertices[vertexId] == nil {
 		fmt.Println("Node doesn't exist")
 		return
@@ -40,7 +40,7 @@ func (g *Graph) AddEdge(vertexId int, destVertexId int) {
 	g.Vertices[vertexId].Edges[destVertexId] = &Edge{Vertex: g.Vertices[destVertexId]}
 } 
 
-func (g *Graph) GetNeighbours(currVertex int) []int {
+func (g *Graph) GetAllNeighbourElements(currVertex int) []int {
 	neighbourList := []int{}
 
 	// for each
@@ -56,38 +56,37 @@ func buildMenuGraph() *Graph {
 	g := CreateNewGraph()
 
 	// add all menu items
-	g.AddVertex(1, "Main Menu")
-	g.AddVertex(2, "Start New Game")
-	g.AddVertex(3, "Resume Saved Game")
-	g.AddVertex(4, "Exit")
-	g.AddVertex(5, "Game Menu")
-	g.AddVertex(6, "Choose Game")
-	g.AddVertex(7, "Save Game")
-	g.AddVertex(8, "Place Number")
-	g.AddVertex(9, "Print Board")
-	g.AddVertex(10, "Undo Move")
+	g.AddNewVertex(1, "Main Menu")
+	g.AddNewVertex(2, "Start New Game")
+	g.AddNewVertex(3, "Resume Saved Game")
+	g.AddNewVertex(4, "Exit")
+	g.AddNewVertex(5, "Game Menu")
+	g.AddNewVertex(6, "Choose Game")
+	g.AddNewVertex(7, "Save Game")
+	g.AddNewVertex(8, "Place Number")
+	g.AddNewVertex(9, "Print Board")
+	g.AddNewVertex(10, "Undo Move")
 	
 	// add all menu connections
-	g.AddEdge(1,2)
-	g.AddEdge(1,3)
-	g.AddEdge(1,4)
-	//g.AddEdge(1,5) You should not be able to get from the main menu straight to the games menu
+	g.AddNewEdge(1,2)
+	g.AddNewEdge(1,3)
+	g.AddNewEdge(1,4)
 
-	g.AddEdge(2,5)
+	g.AddNewEdge(2,5)
 
-	g.AddEdge(3,4)
-	g.AddEdge(3,6)
+	g.AddNewEdge(3,4)
+	g.AddNewEdge(3,6)
 
 	// no need to connect Vertex 4 as it exits the programme
 
-	g.AddEdge(5,1)
-	g.AddEdge(5,4)
-	g.AddEdge(5,7)
-	g.AddEdge(5,8)
-	g.AddEdge(5,9)
-	g.AddEdge(5,10)
+	g.AddNewEdge(5,1)
+	g.AddNewEdge(5,4)
+	g.AddNewEdge(5,7)
+	g.AddNewEdge(5,8)
+	g.AddNewEdge(5,9)
+	g.AddNewEdge(5,10)
 
-	g.AddEdge(6,5)
+	g.AddNewEdge(6,5)
 
 	return g
 }
