@@ -14,7 +14,6 @@ type game struct {
 	difficulty string
 	gameBoard [9][9] int
 	myMoves MoveStack // [row, col, num]
-	undoneMoves [3] int
 }
 
 func (g *game) createBoard() {
