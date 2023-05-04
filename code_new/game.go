@@ -26,8 +26,6 @@ func (g *game) createBoard() {
 	g.solveBoard(1,0)
 
    	g.removeCells()
-
-//	g.printBoard()
 }
 
 func (g *game) createBoardWithPrefilledDiagonalBoxes() {
@@ -48,7 +46,6 @@ func (g *game) createBoardWithPrefilledDiagonalBoxes() {
 	g.solveBoard(0,0)
 
 	g.removeCells()
-//	fmt.Println(g.gameBoard)
 }
 
 func (g *game) solveBoard(row int, col int) bool {

@@ -11,11 +11,17 @@ import (
 )
 
 func startNewGame() (game){
-	var playerName, difficulty string
+	var playerName, difficultyInput string 
+	difficulty := "easy"
+
 	fmt.Println("Enter your name")
 	fmt.Scan(&playerName)
 	fmt.Println("Enter difficulty: easy, medium, hard")
-	fmt.Scan(&difficulty)
+	fmt.Scan(&difficultyInput)
+	// Some very basic input validation. If input is incorrect or not medium/hard, an easy game is created by default 
+	if difficultyInput == "medium" || difficultyInput == "hard" {
+		difficulty = difficultyInput
+	}
 	newGame := game{id: uuid.New(), playerName : playerName, difficulty: difficulty, isComplete: false} 
 	newGame.createBoard()
 	return newGame
