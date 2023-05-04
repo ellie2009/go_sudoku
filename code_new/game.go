@@ -14,6 +14,7 @@ type game struct {
 	difficulty string
 	gameBoard [9][9] int
 	myMoves MoveStack // [row, col, num]
+	undoneMoves MoveStack
 }
 
 func (g *game) createBoard() {
@@ -152,6 +153,8 @@ func (g *game) undoLastMove() {
 		fmt.Println(err)
 		return
 	}
+	fmt.Println("Undoing move...")
+	g.undoneMoves.AddMove(*lastMove)
 	// set the gameboard cell to 0 
 	g.gameBoard[lastMove.move[0]][lastMove.move[1]] = 0
 }
