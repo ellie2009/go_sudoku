@@ -3,9 +3,12 @@ package main
 import (
 	"fmt"
 	"math/rand"
+
+	"github.com/google/uuid"
 )
 
 type game struct {
+	id uuid.UUID
 	playerName string
 	isComplete bool
 	difficulty string

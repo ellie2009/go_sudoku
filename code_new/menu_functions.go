@@ -6,6 +6,8 @@ import (
 	"sort"
 	"strconv"
 	"strings"
+
+	"github.com/google/uuid"
 )
 
 func startNewGame() (game){
@@ -14,7 +16,7 @@ func startNewGame() (game){
 	fmt.Scan(&playerName)
 	fmt.Println("Enter difficulty: easy, medium, hard")
 	fmt.Scan(&difficulty)
-	newGame := game {playerName : playerName, difficulty: difficulty, isComplete: false} 
+	newGame := game{id: uuid.New(), playerName : playerName, difficulty: difficulty, isComplete: false} 
 	newGame.createBoard()
 	return newGame
 }
@@ -50,6 +52,36 @@ func (g *game) printBoard() {
     }
 }
 
+func (g *game) saveGame() {
+	savedGames[g.id] = *g
+}
+
+func loadSavedGame() (game, error) {
+	if len(savedGames) == 0 {
+		return game{}, errors.New("no games have been saved yet")
+	}
+
+	for _, game := range savedGames {
+		fmt.Println(game.id, game.playerName, game.difficulty)
+	}
+	
+	var userInput string
+	fmt.Println("Select a game to continue by entering its UUID.")
+	fmt.Scan(&userInput)
+
+	gameId, err := uuid.Parse(userInput)
+
+	if err != nil {
+		fmt.Println("Incorrect game UUID entered.")
+		return game{}, err 
+	}
+
+	game := savedGames[gameId]
+	game.printBoard()
+
+	return game, nil
+}
+/*
 func saveGame(g game) {
 	savedGames = append(savedGames, g);
 }
@@ -68,6 +100,7 @@ func loadSavedGame() (*game, error) {
 
 	return &savedGames[userInput], nil
 }
+*/
 
 func (g *Graph) printMenuItems(currMenuItem int) {
 	sb := strings.Builder{}

@@ -5,9 +5,13 @@ import (
 	"math/rand"
 	"strings"
 	"time"
+
+	"github.com/google/uuid"
 )
 
-var savedGames []game; // a slice of games where you can 'save' games
+//var savedGames []game; // a slice of games where you can 'save' games
+
+var savedGames map[uuid.UUID]game
 var currGame game;
 var menu *Graph
 
@@ -19,6 +23,7 @@ func main() {
 	// 1 - Main Menu
 	// 5 - Game Menu
 	menu = buildMenuGraph()
+	savedGames = make(map[uuid.UUID]game)
 
 	for menuLevel != 0 {
 		switch menuLevel {
@@ -45,9 +50,9 @@ func main() {
 					if err != nil {
 						fmt.Println(err)
 					} else {
-					currGame = *savedGame
+					currGame = savedGame
 					menuLevel = 5
-					}
+					} 
 				} else if userInput == 3 { // Exit Programme
 					menuLevel = 0
 				} else {
@@ -60,7 +65,8 @@ func main() {
 					fmt.Println("Exiting...")
 					menuLevel = 0
 				} else if userInput == 3 { // Save Game
-					saveGame(currGame)
+					//saveGame(currGame)
+					currGame.saveGame()
 					fmt.Println("Game saved")
 				} else if userInput == 4 { // Place Number
 					currGame.makeAMove()
