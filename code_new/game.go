@@ -124,7 +124,7 @@ func (g *game) removeCells() {
 	numEmptyCells := 0
 
 	if g.difficulty == "easy" {
-		numEmptyCells = 10
+		numEmptyCells = 2
 	} else if g.difficulty == "medium" {
 		numEmptyCells = 40
 	} else {
@@ -158,6 +158,19 @@ func (g *game) undoLastMove() {
 		fmt.Println(err)
 		return
 	}
-	// set the gameboard to 0 
+	// set the gameboard cell to 0 
 	g.gameBoard[lastMove.move[0]][lastMove.move[1]] = 0
+}
+
+func (g *game) isGameComplete() (bool) {
+
+	for row := 0; row < 9; row++ {
+		for col := 0; col < 9; col ++{
+			if g.gameBoard[row][col] == 0 {
+				return false
+			}
+		}
+	}
+
+	return true
 }

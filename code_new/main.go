@@ -73,6 +73,11 @@ func main() {
 					fmt.Println("===================")
 					currGame.printBoard()
 					fmt.Println("===================")
+					if currGame.isGameComplete() {
+						fmt.Println("You have won!\n Returning to Main Menu")
+						currGame.isComplete = true
+						menuLevel = 1
+					}
 				} else if userInput == 5 { // Print Board
 					currGame.printBoard()
 				} else if userInput == 6 { // Undo Last Move
