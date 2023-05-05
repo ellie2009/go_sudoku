@@ -119,11 +119,11 @@ func (g *game) removeCells() {
 	numEmptyCells := 0
 
 	if g.difficulty == "easy" {
-		numEmptyCells = 2
+		numEmptyCells = 43
 	} else if g.difficulty == "medium" {
-		numEmptyCells = 40
+		numEmptyCells = 55
 	} else {
-		numEmptyCells = 80
+		numEmptyCells = 64
 	}
 
 	emptyCellCount := 0
